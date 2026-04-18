@@ -469,8 +469,7 @@ print(np.mean(samples_beta_1, axis=0))
 print(np.mean(samples_gamma_1, axis=0))
 
 samples = np.concatenate([samples_beta_1, samples_gamma_1], axis=1)
-best_n_clusters, bic_scores = select_cluster_number_bic(samples, max_clusters=2)
-labels, summary = summarize_multimodal_posterior(samples, n_clusters=best_n_clusters)
+labels, summary = summarize_multimodal_posterior(samples, n_clusters=2)
 for k in summary:
     print(f"Cluster {k}:")
     print("  Number of samples =", summary[k]["n_samples"])
@@ -535,8 +534,7 @@ print(np.mean(samples_beta_3, axis=0))
 print(np.mean(samples_gamma_3, axis=0))
 
 samples = np.concatenate([samples_beta_3, samples_gamma_3], axis=1)
-best_n_clusters, bic_scores = select_cluster_number_bic(samples, max_clusters=2)
-labels, summary = summarize_multimodal_posterior(samples, n_clusters=best_n_clusters)
+labels, summary = summarize_multimodal_posterior(samples, n_clusters=2)
 for k in summary:
     print(f"Cluster {k}:")
     print("  Number of samples =", summary[k]["n_samples"])
@@ -704,8 +702,7 @@ print(np.mean(samples_beta_5, axis=0))
 print(np.mean(samples_gamma_5, axis=0))
 
 samples = np.concatenate([samples_beta_5, samples_gamma_5], axis=1)
-best_n_clusters, bic_scores = select_cluster_number_bic(samples, max_clusters=2)
-labels, summary = summarize_multimodal_posterior(samples, n_clusters=best_n_clusters)
+labels, summary = summarize_multimodal_posterior(samples, n_clusters=2)
 for k in summary:
     print(f"Cluster {k}:")
     print("  Number of samples =", summary[k]["n_samples"])
