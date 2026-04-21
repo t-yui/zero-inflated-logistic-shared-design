@@ -6,6 +6,7 @@
 
 # allow a specified file
 !*.py
+!*.R
 
 !.gitignore
 !.gitkeep
