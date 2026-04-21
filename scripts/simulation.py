@@ -287,7 +287,7 @@ def generate_boxplot(data_type, bias=True):
     for idx, (s_name, params) in enumerate(scenarios.items()):
         ax = axes[idx]
         true_vals = params[data_type]
-        sym = "β" if data_type == "beta" else "γ"
+        sym = "\\beta" if data_type == "beta" else "\\gamma"
         plot_data = []
         for m in (
             ["proposed", "lr", "naive"]
@@ -299,9 +299,12 @@ def generate_boxplot(data_type, bias=True):
                 m_lbl = {"proposed": "Prop", "lr": "LR", "naive": "Naive"}[m]
                 for i in range(len(true_vals)):
                     vals = estimates[:, i] - true_vals[i] if bias else estimates[:, i]
-                    plot_data.extend(zip(vals, [f"{sym}{i} ({m_lbl})"] * len(vals)))
-        df = pd.DataFrame(plot_data, columns=["Val", "Param"])
-        sns.boxplot(data=df, x="Param", y="Val", ax=ax)
+                    plot_data.extend(zip(vals, [f"${sym}_{i}$ ({m_lbl})"] * len(vals), [f"{m_lbl}"] * len(vals)))
+        df = pd.DataFrame(plot_data, columns=["Val", "Param", "method"])
+        if data_type == "beta":
+            sns.boxplot(data=df, x="Param", y="Val", ax=ax, hue="method", dodge=False)
+        else:
+            sns.boxplot(data=df, x="Param", y="Val", ax=ax, hue="method", dodge=False)
         if bias:
             ax.axhline(0, color="red", linestyle="--", alpha=0.5)
         else:
@@ -325,9 +328,7 @@ def generate_boxplot(data_type, bias=True):
 
 
 generate_boxplot("beta", True)
-generate_boxplot("beta", False)
 generate_boxplot("gamma", True)
-generate_boxplot("gamma", False)
 
 print("\nSummary Statistics:\n" + "=" * 90)
 print(
